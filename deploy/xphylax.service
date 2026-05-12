@@ -1,0 +1,21 @@
+[Unit]
+Description=xPhylax real-time log monitoring and active response
+Documentation=https://example.com/xphylax
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=-/etc/xphylax.conf
+ExecStart=/usr/local/bin/xphylax --verbose
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/etc/ufw /var/lib/ufw /var/log/xphylax
+
+[Install]
+WantedBy=multi-user.target
